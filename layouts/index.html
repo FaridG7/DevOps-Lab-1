@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+<aside class="sidebar">
+  <div class="container sidebar-sticky">
+      <section id="about">
+        <h1>{{ .Site.Data.biography.name }}</h1>
+        <h2>{{ .Site.Data.biography.title }}</h2>
+        <p>{{ .Site.Data.biography.about }}</p>
+        <h3>Contact</h3>
+        <ul>
+          {{ range $key, $value := .Site.Data.biography.contact }}
+          <li><strong>{{ $key }}:</strong> {{ $value }}</li>
+          {{ end }}
+        </ul>
+        <h3>Languages</h3>
+        <ul>
+          {{ range .Site.Data.biography.languages }}
+          <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </section>
+  </div>
+</aside>
+    </div>
+    <div class="col-sm-9">
+      <section id="experience">
+        <h2>Experience</h2>
+        {{ range .Site.Data.experiences }}
+        <div class="exp-item">
+          <h3><a href="/experience/{{ .id }}">{{ .role }} at {{ .company }}</a></h3>
+          <p>{{ .period }} – {{ .location }}</p>
+          <p>{{ .summary }}</p>
+          {{ with .tags }}
+          <p>
+            {{ range . }}<span class="tag">{{ . }}</span> {{ end }}
+          </p>
+          {{ end }}
+        </div>
+        {{ end }}
+      </section>
+      <!-- Repeat for education, skills, qualifications… -->
+    </div>
+  </div>
+</div>
+{{ end }}
