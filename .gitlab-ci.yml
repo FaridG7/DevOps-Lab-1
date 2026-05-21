@@ -30,5 +30,5 @@ deploy-job:
     - ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
     - ssh -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" 'echo SSH connection OK'
   script:
-    - rsync -avz --delete public/ "${DEPLOY_USER}@${DEPLOY_HOST}:~/www/"
+    - rsync -rvz --delete --no-t  public/ "${DEPLOY_USER}@${DEPLOY_HOST}:~/www/"
 
